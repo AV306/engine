@@ -1,13 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "map.cpp"
+
 using namespace std;
 
 int main()
 {
     sf::RenderWindow window{ sf::VideoMode{ 200, 200 }, "Test" };
-    //sf::CircleShape shape{ 100.f };
-    //shape.setFillColor( sf::Color::Green );
+    
 
     // Load texture atlas
     sf::Texture spriteAtlas;
@@ -18,6 +19,8 @@ int main()
     sf::Sprite sprite;
     sprite.setTexture( spriteAtlas );
     sprite.setTextureRect( sf::IntRect{ 0, 0, 64, 64 } );
+
+    Engine::Map map{ "J:/silenced-engine/TestMap.map" };
 
     float yMovement{};
     float xMovement{};
@@ -41,11 +44,11 @@ int main()
             xMovement = -20.0 * deltaTime;
 
         if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
-            yMovement = 20.0 * deltaTime;
-        else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
             yMovement = -20.0 * deltaTime;
+        else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
+            yMovement = 20.0 * deltaTime;
 
-        sprite.move( sf::Vector2f{ xMovement, yMovement } );
+        sprite.move( xMovement, yMovement );
 
         window.clear();
         window.draw( sprite );
