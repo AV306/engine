@@ -1,0 +1,17 @@
+# Silenced unpacked assets
+Assets/
+*.7z
+*.zip
+*.xz
+
+# Silenced packed assets
+*.rgss3a
+
+# 7zip
+7zip/
+
+# Compiled binaries
+*.exe
+
+# Anything else I want to ignore
+*.ignore
