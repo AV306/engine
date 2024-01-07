@@ -14,7 +14,8 @@ int main()
     Engine::initTilemap( "J:/silenced-engine/Assets/Graphics/Tilesets/00.png" );
 
     sf::Sprite sprite;
-    //sprite.setTexture( spriteAtlas );
+    sf::Texture spriteAtlas; spriteAtlas.loadFromFile( "J:/silenced-engine/Assets/Graphics/Characters/00.png" );
+    sprite.setTexture( spriteAtlas );
     sprite.setTextureRect( sf::IntRect{ 0, 0, 64, 64 } );
 
     Engine::Map map{ "J:/silenced-engine/TestMap.map" };
@@ -48,7 +49,7 @@ int main()
         sprite.move( xMovement, yMovement );
 
         window.clear();
-        //window.draw( sprite );
+        window.draw( sprite );
         window.draw( map );
         window.display();
     }

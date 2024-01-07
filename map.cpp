@@ -48,18 +48,30 @@ namespace Engine
             this->vertices.resize( width * height * 4 );
 
             // Populate VAO
-            for ( auto i = 0; i < width*height; i++ )
+            for ( uint i = 0; i < width*height; i++ )
             {
                 uchar tileID;
                 mapStream >> tileID;
-                std::cout << tileID;
+                //std::cout << (int) tileID;
 
-                // Corners, starting from top-left, clockwise
-                auto x = i % width, y = i / width;
-                auto u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
+                uint x = i % width, y = i / width;
+                uint u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
 
-                this->vertices[v].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
+                // Top-left corner
+                this->vertices[i].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
                 this->vertices[i].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
+
+                // Top-right
+                this->vertices[i+1].position = sf::Vector2f{ (x+1) * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[i+1].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
+
+                // Bottom right
+                this->vertices[i+2].position = sf::Vector2f{ (x+1) * TILESET_TILE_SIZE_PIXELS, (y+1) * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[i+2].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_HEIGHT_TILES };
+
+                // Bottom left
+                this->vertices[i+3].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[i+3].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_HEIGHT_TILES };
             }
         }
 
@@ -69,11 +81,6 @@ namespace Engine
 
             // Build texture
         }*/
-
-        ~Map() noexcept
-        {
-        }
-
         private:
             uchar width; // Width of map in tiles
             uchar height; // Height of map in tiles
