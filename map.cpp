@@ -31,15 +31,16 @@ namespace Engine
     {
         Map( std::string filename )
         {
-            std::ifstream map_ifstream{ filename };
+            std::ifstream mapStream{ filename };
 
             // Ensure map file is valid
             char M, A, P;
-            map_ifstream >> M >> A >> P;
-            if ( !map_ifstream || M != 'M' || A != 'A' || P != 'P' ) throw std::invalid_argument{ "Invalid map file provided" };
+            mapStream >> M >> A >> P;
+            if ( !mapStream || M != 'M' || A != 'A' || P != 'P' )
+                throw std::invalid_argument{ "Invalid map file provided" };
 
             // Read width and height from map
-            map_ifstream >> this->width >> this->height;
+            mapStream >> this->width >> this->height;
 
             // Allocate space for tile array
             // We have to use quads because the texcoords are discontinuous
@@ -47,42 +48,19 @@ namespace Engine
             this->vertices.resize( width * height * 4 );
 
             // Populate VAO
-            for ( uchar x = 0; x < width; x++ )
+            for ( auto i = 0; i < width*height; i++ )
             {
-                for ( uchar y = 0; y < height; y++ )
+                uchar tileID;
+                mapStream >> tileID;
+                std::cout << tileID;
+
+                // Corners, starting from top-left, clockwise
+                auto u = i % width, v = i / width;
+
+                for ( auto vertexIndex = i; vertexIndex < 3; vertexIndex++ )
                 {
-                    // The index of the current map tile
-                    uint map_tileIndex = x + (y * width);
-
-
-                    // Seek to point in ifstream that defines the tile to use for this quad
-                    // Add 5 to the tile index because of "MAP" header and the map dimensions
-                    
-                    map_ifstream.seekg( 5 + map_tileIndex, std::ios::beg );
-                    uint tileset_tileIndex; map_ifstream >> tileset_tileIndex;
-                    //std::cout << "Tileset tile index: " << tileset_tileIndex << '\n';
-                    tileset_tileIndex = 2;
-
-                    // Get the coordinates of the upper-right corner of the tile in the tileset
-                    uint u = (tileset_tileIndex % TILESET_WIDTH_TILES) * TILESET_TILE_SIZE_PIXELS;
-                    uint v = (tileset_tileIndex / TILESET_WIDTH_TILES) * TILESET_TILE_SIZE_PIXELS;
-
-                    std::cout << "Tileset UV: " << u << ", " << v << '\n';
-
-                    // Get pointer to the corner of the current map tile quad
-                    sf::Vertex* quad = &(vertices[map_tileIndex * 4]);
-
-                    // Define corners
-                    quad[0].position = sf::Vector2f( x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS );
-                    quad[1].position = sf::Vector2f( (x + 1) * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS );
-                    quad[2].position = sf::Vector2f( (x + 1) * TILESET_TILE_SIZE_PIXELS, (y + 1) * TILESET_TILE_SIZE_PIXELS );
-                    quad[3].position = sf::Vector2f( x * TILESET_TILE_SIZE_PIXELS, (y + 1) * TILESET_TILE_SIZE_PIXELS );
-
-                    // Define texcoords
-                    quad[0].texCoords = sf::Vector2f( u * TILESET_TILE_SIZE_PIXELS, v * TILESET_TILE_SIZE_PIXELS );
-                    quad[1].texCoords = sf::Vector2f( (u + 1) * TILESET_TILE_SIZE_PIXELS,v * TILESET_TILE_SIZE_PIXELS );
-                    quad[2].texCoords = sf::Vector2f( (u + 1) * TILESET_TILE_SIZE_PIXELS, (v + 1) * TILESET_TILE_SIZE_PIXELS );
-                    quad[3].texCoords = sf::Vector2f( u * TILESET_TILE_SIZE_PIXELS, (v + 1) * TILESET_TILE_SIZE_PIXELS );
+                    this->vertices[v].position = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_TILE_SIZE_PIXELS };
+                    this->vertices[i].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
                 }
             }
         }
