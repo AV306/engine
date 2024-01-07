@@ -55,13 +55,11 @@ namespace Engine
                 std::cout << tileID;
 
                 // Corners, starting from top-left, clockwise
-                auto u = i % width, v = i / width;
+                auto x = i % width, y = i / width;
+                auto u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
 
-                for ( auto vertexIndex = i; vertexIndex < 3; vertexIndex++ )
-                {
-                    this->vertices[v].position = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_TILE_SIZE_PIXELS };
-                    this->vertices[i].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
-                }
+                this->vertices[v].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[i].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
             }
         }
 
