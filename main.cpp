@@ -7,17 +7,14 @@ using namespace std;
 
 int main()
 {
-    sf::RenderWindow window{ sf::VideoMode{ 200, 200 }, "Test" };
+    sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "test" };
     
 
     // Load texture atlas
-    sf::Texture spriteAtlas;
-    if ( !spriteAtlas.loadFromFile(
-        "J:/silenced-engine/Assets/Graphics/Characters/00.png"
-    ) ) cout << "Failed to load sprite atlas\n";
+    Engine::initTilemap( "J:/silenced-engine/Assets/Graphics/Tilesets/00.png" );
 
     sf::Sprite sprite;
-    sprite.setTexture( spriteAtlas );
+    //sprite.setTexture( spriteAtlas );
     sprite.setTextureRect( sf::IntRect{ 0, 0, 64, 64 } );
 
     Engine::Map map{ "J:/silenced-engine/TestMap.map" };
@@ -51,7 +48,8 @@ int main()
         sprite.move( xMovement, yMovement );
 
         window.clear();
-        window.draw( sprite );
+        //window.draw( sprite );
+        window.draw( map );
         window.display();
     }
 
