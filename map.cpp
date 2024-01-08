@@ -4,6 +4,7 @@
 
 #include "constants.hpp"
 #include "types.hpp"
+#include "utils.hpp"
 
 #include <cstddef>
 #include <exception>
@@ -17,21 +18,23 @@
 
 namespace Engine
 {
-    sf::Texture tileset;
+    //sf::Texture tileset;
 
-    void initTilemap( std::string tileset_path )
+    /*void initTilemap( std::string tileset_path )
     {
         if ( !tileset.loadFromFile( tileset_path ) )
             throw std::invalid_argument{ "Failed to load tileset atlas" };
-    }
+    }*/
 
 
 
     struct Map extends public sf::Drawable, public sf::Transformable
     {
-        Map( std::string filename )
+        Map( std::string& mapFilename, std::string& tilesetFilename )
         {
-            std::ifstream mapStream{ filename };
+            // Initialise tileset texture
+            loadTextureFileOrThrow( this->texture );
+            std::ifstream mapStream{ mapFilename };
 
             // Ensure map file is valid
             char M, A, P;
@@ -41,6 +44,7 @@ namespace Engine
 
             // Read width and height from map
             mapStream >> this->width >> this->height;
+            std::cout << "W: " << width << "; H: " << height << '\n';
 
             // Allocate space for tile array
             // We have to use quads because the texcoords are discontinuous
@@ -48,14 +52,15 @@ namespace Engine
             this->vertices.resize( width * height * 4 );
 
             // Populate VAO
-            for ( uint i = 0; i < width*height; i++ )
+            // 0xFF * 0xFF = 0xFE01
+            for ( ushort i = 0; i < width*height; i++ )
             {
                 uchar tileID;
                 mapStream >> tileID;
                 //std::cout << (int) tileID;
 
-                uint x = i % width, y = i / width;
-                uint u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
+                ushort x = i % width, y = i / width;
+                uchar u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
 
                 // Top-left corner
                 this->vertices[i].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
@@ -86,7 +91,7 @@ namespace Engine
             uchar height; // Height of map in tiles
             //uchar* tiles; // Array of tilemap indexes
 
-            //sf::Texture texture;
+            sf::Texture tileset;
             sf::VertexArray vertices;
 
             //vector<ushort> border_tiles; // Array of tile array indexes that cannot be moved onto
