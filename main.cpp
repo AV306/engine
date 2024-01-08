@@ -16,7 +16,8 @@ int main()
     sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
     sf::Sprite sprite;
-    sf::Texture spriteAtlas; spriteAtlas.loadFromFile( "/workspace/silenced-engine/Assets/Graphics/Characters/00.png" );
+    sf::Texture spriteAtlas;
+    Engine::loadTextureFileOrThrow( spriteAtlas, "/workspace/silenced-engine/Assets/Graphics/Characters/00.png" );
     sprite.setTexture( spriteAtlas );
     sprite.setTextureRect( sf::IntRect{ 0, 0, 64, 64 } );
 
@@ -51,8 +52,8 @@ int main()
         sprite.move( xMovement, yMovement );
 
         window.clear();
-        window.draw( sprite );
         window.draw( map );
+        window.draw( sprite );
         window.display();
     }
 

@@ -42,49 +42,38 @@ namespace Engine
             // Allocate space for tile array
             // We have to use quads because the texcoords are discontinuous
             this->vertices.setPrimitiveType( sf::Quads );
-            //this->vertices.resize( width * height * 4 );
-            this->vertices.resize( 4 ); // debug
+            this->vertices.resize( width * height * 4 );
 
-            // debug square
-            this->vertices[0].position = sf::Vector2f{ 10.0, 10.0 };
-            this->vertices[0].texCoords = sf::Vector2f{ 64.0, 0.0 };
-
-            this->vertices[1].position = sf::Vector2f{ 110.0, 10.0 };
-            this->vertices[1].texCoords = sf::Vector2f{ 96.0, 0.0 };
-
-            this->vertices[2].position = sf::Vector2f{ 110.0, 110.0 };
-            this->vertices[2].texCoords = sf::Vector2f{ 96.0, 32.0 };
-
-            this->vertices[3].position = sf::Vector2f{ 10.0, 110.0 };
-            this->vertices[3].texCoords = sf::Vector2f{ 64.0, 32.0 };
 
             // Populate VAO
             // 0xFF * 0xFF = 0xFE01
-            /*for ( uint16_t i = 0; i < width*height; i++ )
+            for ( uint16_t mapTileIndex = 0; mapTileIndex < width*height; mapTileIndex++ )
             {
                 uint8_t tileID;
                 mapStream >> tileID;
                 //std::cout << (int) tileID;
 
-                uint16_t x = i % width, y = i / width;
+                uint16_t x = mapTileIndex % width, y = mapTileIndex / width;
                 uint8_t u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
 
+                uint startingVertexIndex = mapTileIndex * 4;
+                // Pointer to starting vertex
                 // Top-left corner
-                this->vertices[i].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
-                this->vertices[i].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
+                this->vertices[startingVertexIndex].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[startingVertexIndex].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_TILE_SIZE_PIXELS };
 
                 // Top-right
-                this->vertices[i+1].position = sf::Vector2f{ (x+1) * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
-                this->vertices[i+1].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, v * TILESET_HEIGHT_TILES };
+                this->vertices[startingVertexIndex+1].position = sf::Vector2f{ (x+1) * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[startingVertexIndex+1].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, v * TILESET_TILE_SIZE_PIXELS };
 
                 // Bottom right
-                this->vertices[i+2].position = sf::Vector2f{ (x+1) * TILESET_TILE_SIZE_PIXELS, (y+1) * TILESET_TILE_SIZE_PIXELS };
-                this->vertices[i+2].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_HEIGHT_TILES };
+                this->vertices[startingVertexIndex+2].position = sf::Vector2f{ (x+1) * TILESET_TILE_SIZE_PIXELS, (y+1) * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[startingVertexIndex+2].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_TILE_SIZE_PIXELS };
 
                 // Bottom left
-                this->vertices[i+3].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
-                this->vertices[i+3].texCoords = sf::Vector2f{ (u+1) * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_HEIGHT_TILES };
-            }*/
+                this->vertices[startingVertexIndex+3].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, (y+1) * TILESET_TILE_SIZE_PIXELS };
+                this->vertices[startingVertexIndex+3].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_TILE_SIZE_PIXELS };
+            }
         }
 
         /*Map( uint8_t width, uint8_t height, uint8_t* tiles ) : width{ width }, height{ height }
