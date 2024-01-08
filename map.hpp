@@ -57,7 +57,7 @@ namespace Engine
                 uint8_t u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
 
                 uint startingVertexIndex = mapTileIndex * 4;
-                // Pointer to starting vertex
+
                 // Top-left corner
                 this->vertices[startingVertexIndex].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, y * TILESET_TILE_SIZE_PIXELS };
                 this->vertices[startingVertexIndex].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, v * TILESET_TILE_SIZE_PIXELS };
@@ -76,12 +76,6 @@ namespace Engine
             }
         }
 
-        /*Map( uint8_t width, uint8_t height, uint8_t* tiles ) : width{ width }, height{ height }
-        {
-            // Populate tile array
-
-            // Build texture
-        }*/
         private:
             virtual void draw( sf::RenderTarget& target, sf::RenderStates states ) const
             {

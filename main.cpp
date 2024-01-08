@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "map.cpp"
+#include "map.hpp"
+#include "player.hpp"
 
 #ifdef _WIN32
     #define PROJECT_DIR "J:/silenced-engine/"
@@ -15,11 +16,7 @@ int main()
 {
     sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
-    sf::Sprite sprite;
-    sf::Texture spriteAtlas;
-    Engine::loadTextureFileOrThrow( spriteAtlas, "/workspace/silenced-engine/Assets/Graphics/Characters/00.png" );
-    sprite.setTexture( spriteAtlas );
-    sprite.setTextureRect( sf::IntRect{ 0, 0, 64, 64 } );
+    Engine::Player player{ "/workspace/silenced-engine/Assets/Graphics/Characters/00.png", 1 };
 
     Engine::Map map{ "/workspace/silenced-engine/TestMap.map", "/workspace/silenced-engine/Assets/Graphics/Tilesets/00.png" };
 
@@ -49,11 +46,11 @@ int main()
         else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
             yMovement = 20.0 * deltaTime;
 
-        sprite.move( xMovement, yMovement );
+        player.move( xMovement, yMovement );
 
         window.clear();
         window.draw( map );
-        window.draw( sprite );
+        window.draw( player );
         window.display();
     }
 
