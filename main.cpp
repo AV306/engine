@@ -3,22 +3,24 @@
 
 #include "map.cpp"
 
+#ifdef _WIN32
+    #define PROJECT_DIR "J:/silenced-engine/"
+#else
+    #define PROJECT_DIR "/workspace/silenced-engine/"
+#endif
+
 using namespace std;
 
 int main()
 {
-    sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "test" };
-    
-
-    // Load texture atlas
-    Engine::initTilemap( "J:/silenced-engine/Assets/Graphics/Tilesets/00.png" );
+    sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
     sf::Sprite sprite;
-    sf::Texture spriteAtlas; spriteAtlas.loadFromFile( "J:/silenced-engine/Assets/Graphics/Characters/00.png" );
+    sf::Texture spriteAtlas; spriteAtlas.loadFromFile( "/workspace/silenced-engine/Assets/Graphics/Characters/00.png" );
     sprite.setTexture( spriteAtlas );
     sprite.setTextureRect( sf::IntRect{ 0, 0, 64, 64 } );
 
-    Engine::Map map{ "J:/silenced-engine/TestMap.map" };
+    Engine::Map map{ "/workspace/silenced-engine/TestMap.map", "/workspace/silenced-engine/Assets/Graphics/Tilesets/00.png" };
 
     float yMovement{};
     float xMovement{};
