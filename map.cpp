@@ -21,10 +21,10 @@ namespace Engine
 {
     struct Map extends public sf::Drawable, public sf::Transformable
     {
-        Map( std::string& mapFilename, std::string& tilesetFilename )
+        Map( std::string mapFilename, std::string tilesetFilename )
         {
             // Initialise tileset texture
-            loadTextureFileOrThrow( this->texture );
+            loadTextureFileOrThrow( this->tilesetTexture, tilesetFilename );
 
             // Prepare to read map file
             std::ifstream mapStream{ mapFilename };
@@ -37,7 +37,7 @@ namespace Engine
 
             // Read width and height from map
             mapStream >> this->width >> this->height;
-            std::cout << "W: " << width << "; H: " << height << '\n';
+            //std::cout << "W: " << (short) width << "; H: " << (short) height << '\n';
 
             // Allocate space for tile array
             // We have to use quads because the texcoords are discontinuous
@@ -55,8 +55,8 @@ namespace Engine
             this->vertices[2].position = sf::Vector2f{ 110.0, 110.0 };
             this->vertices[2].texCoords = sf::Vector2f{ 96.0, 32.0 };
 
-            this->vertices[4].position = sf::Vector2f{ 10.0, 110.0 };
-            this->vertices[4].texCoords = sf::Vector2f{ 64.0, 32.0 };
+            this->vertices[3].position = sf::Vector2f{ 10.0, 110.0 };
+            this->vertices[3].texCoords = sf::Vector2f{ 64.0, 32.0 };
 
             // Populate VAO
             // 0xFF * 0xFF = 0xFE01
@@ -87,7 +87,7 @@ namespace Engine
             }*/
         }
 
-        /*Map( uchar width, uchar height, uchar* tiles ) : width{ width }, height{ height }
+        /*Map( uint8_t width, uint8_t height, uint8_t* tiles ) : width{ width }, height{ height }
         {
             // Populate tile array
 
@@ -100,7 +100,7 @@ namespace Engine
                 states.transform *= this->getTransform(); // getTransform() is defined by sf::Transformable
 
                 // apply the texture
-                states.texture = &tileset;
+                states.texture = &tilesetTexture;
 
                 // you may also override states.shader or states.blendMode if you want
 
@@ -111,11 +111,11 @@ namespace Engine
             
             uint8_t width; // Width of map in tiles
             uint8_t height; // Height of map in tiles
-            //uchar* tiles; // Array of tilemap indexes
+            //uint8_t* tiles; // Array of tilemap indexes
 
-            sf::Texture tileset;
+            sf::Texture tilesetTexture;
             sf::VertexArray vertices;
 
-            //vector<ushort> border_tiles; // Array of tile array indexes that cannot be moved onto
+            //vector<uint16_t> border_tiles; // Array of tile array indexes that cannot be moved onto
     };
 }
