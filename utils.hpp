@@ -6,11 +6,11 @@
 
 namespace Engine
 {
-void loadTextureFileOrThrow( sf::Texture& tex, std::string& filename )
-{
-    if ( !tex.loadFromFile( filename ) )
-        throw std::invalid_argument{ "Failed to load texture from " + filename };
+    void loadTextureFileOrThrow( sf::Texture& tex, std::string& filename )
+    {
+       if ( !tex.loadFromFile( filename ) )
+            throw std::invalid_argument{ "Failed to load texture from " + filename };
 
-    std::cout << "Loaded texture from " << filename << '\n';
-}
+        std::cout << "Loaded texture from " << filename << '\n';
+    }
 }
