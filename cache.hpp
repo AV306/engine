@@ -21,13 +21,16 @@ namespace Engine
             {
                 sf::Texture tex{};
                 loadTextureFileOrThrow( tex, entry.path() );
-                this->textures.insert( entry.filename(), tex );
+                this->textures.insert( {entry.path().filename().string(), tex} );
             }
         }
 
         sf::Texture* getTexturePointer( std::string filename )
         {
-            return &(this->texture.at( filename ));
+            return &(this->textures.at( filename ));
         }
+
+        private:
+            std::map<std::string, sf::Texture> textures{};
     };
 }

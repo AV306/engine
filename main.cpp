@@ -1,24 +1,21 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "cache.hpp"
 #include "map.hpp"
 #include "player.hpp"
-
-#ifdef _WIN32
-    #define PROJECT_DIR "J:/silenced-engine/"
-#else
-    #define PROJECT_DIR "/workspace/silenced-engine/"
-#endif
 
 using namespace std;
 
 int main()
 {
+    Engine::TextureCache tilesetTextureCache{ "/workspace/silenced-engine/Assets/Graphics/Tilesets/" };
+
     sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
     Engine::Player player{ "/workspace/silenced-engine/Assets/Graphics/Characters/00.png", 1 };
 
-    Engine::Map map{ "/workspace/silenced-engine/TestMap.map", "/workspace/silenced-engine/Assets/Graphics/Tilesets/00.png" };
+    Engine::Map map{ "/workspace/silenced-engine/TestMap.map", tilesetTextureCache.getTexturePointer( "00.png" ) };
 
     float yMovement{};
     float xMovement{};
