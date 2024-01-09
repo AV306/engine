@@ -52,7 +52,7 @@ namespace Engine
             for ( uint16_t mapTileIndex = 0; mapTileIndex < width*height; mapTileIndex++ )
             {
                 uint8_t tileID = (uint8_t) mapStream.get();
-                std::cout << "Drawing tile ID " << (short) tileID << "; ";
+                //std::cout << "Drawing tile ID " << (short) tileID << "; ";
 
                 uint16_t x = mapTileIndex % width, y = mapTileIndex / width;
                 uint8_t u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
@@ -76,7 +76,7 @@ namespace Engine
                 this->vertices[startingVertexIndex+3].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_TILE_SIZE_PIXELS };
             }
 
-            std::cout << std::endl;
+            //std::cout << std::endl;
         }
 
         private:

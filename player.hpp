@@ -15,11 +15,12 @@ namespace Engine
 {
     struct Player extends public sf::Drawable, public sf::Transformable
     {
-        Player( std::string spriteAtlasPath, uint8_t startingTileIndex )
+        Player( sf::Texture* spriteAtlasPointer, uint8_t startingTileIndex )
         {
             // Load sprite atlas
             // TODO: Some characters' sprites stretch across more than one map
-            loadTextureFileOrThrow( this->spriteAtlas, spriteAtlasPath );
+            //loadTextureFileOrThrow( this->spriteAtlas, spriteAtlasPath );
+            this->spriteAtlasPointer = spriteAtlasPointer;
 
             // Populate vertex array
             this->vertices.setPrimitiveType( sf::Quads );
@@ -53,7 +54,7 @@ namespace Engine
                 states.transform *= this->getTransform(); // getTransform() is defined by sf::Transformable
 
                 // apply the texture
-                states.texture = &spriteAtlas;
+                states.texture = spriteAtlasPointer;
 
                 // you may also override states.shader or states.blendMode if you want
 
@@ -61,7 +62,7 @@ namespace Engine
                 target.draw( vertices, states );
             }
 
-            sf::Texture spriteAtlas;
+            sf::Texture* spriteAtlasPointer;
             sf::VertexArray vertices;
     };
 }
