@@ -26,7 +26,7 @@ namespace Engine
             this->vertices.resize( 4 );
 
             uint8_t u = startingTileIndex % SPRITE_ATLAS_WIDTH_SPRITES, v = startingTileIndex / SPRITE_ATLAS_WIDTH_SPRITES;
-            std::cout << SPRITE_ATLAS_SPRITE_SIZE_PIXELS << '\n';
+            //std::cout << SPRITE_ATLAS_SPRITE_SIZE_PIXELS << '\n';
             //uint8_t u = 0, v = 0;
 
             // Top left

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <filesystem>
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -15,6 +16,7 @@ namespace Engine
     {
         TextureCache( std::string textureDir )
         {
+            std::cout << "Caching textures from " << textureDir << '\n';
             std::filesystem::path path{ textureDir };
 
             for ( const auto& entry : std::filesystem::directory_iterator{ path } )

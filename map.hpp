@@ -23,6 +23,8 @@ namespace Engine
     {
         Map( std::string mapFilename, sf::Texture* texturePointer )
         {
+            std::cout << "Loading map " << mapFilename << '\n';
+
             // Set pointer to tileset texture
             this->tilesetTexturePointer = texturePointer;
 
@@ -37,7 +39,7 @@ namespace Engine
 
             // Read width and height from map
             mapStream >> this->width >> this->height;
-            //std::cout << "W: " << (short) width << "; H: " << (short) height << '\n';
+            std::cout << "Map is " << (short) this->width << " by " << (short) this->height << " tiles\n";
 
             // Allocate space for tile array
             // We have to use quads because the texcoords are discontinuous
@@ -49,9 +51,8 @@ namespace Engine
             // 0xFF * 0xFF = 0xFE01
             for ( uint16_t mapTileIndex = 0; mapTileIndex < width*height; mapTileIndex++ )
             {
-                uint8_t tileID;
-                mapStream >> tileID;
-                //std::cout << (int) tileID;
+                uint8_t tileID = (uint8_t) mapStream.get();
+                std::cout << "Drawing tile ID " << (short) tileID << "; ";
 
                 uint16_t x = mapTileIndex % width, y = mapTileIndex / width;
                 uint8_t u = tileID % TILESET_WIDTH_TILES, v = tileID / TILESET_WIDTH_TILES;
@@ -74,6 +75,8 @@ namespace Engine
                 this->vertices[startingVertexIndex+3].position = sf::Vector2f{ x * TILESET_TILE_SIZE_PIXELS, (y+1) * TILESET_TILE_SIZE_PIXELS };
                 this->vertices[startingVertexIndex+3].texCoords = sf::Vector2f{ u * TILESET_TILE_SIZE_PIXELS, (v+1) * TILESET_TILE_SIZE_PIXELS };
             }
+
+            std::cout << std::endl;
         }
 
         private:
