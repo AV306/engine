@@ -10,10 +10,11 @@ using namespace std;
 int main()
 {
     Engine::TextureCache tilesetTextureCache{ "/workspace/silenced-engine/Assets/Graphics/Tilesets/" };
+    Engine::TextureCache spriteAtlasTextureCache{ "/workspace/silenced-engine/Assets/Graphics/Characters/" };
 
     sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
-    Engine::Player player{ "/workspace/silenced-engine/Assets/Graphics/Characters/00.png", 1 };
+    Engine::Player player{ spriteAtlasTextureCache.getTexturePointer( "00.png" ), 1 };
 
     Engine::Map map{ "/workspace/silenced-engine/TestMap2.map", tilesetTextureCache.getTexturePointer( "00.png" ) };
 

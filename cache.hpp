@@ -12,6 +12,7 @@
 namespace Engine
 {
     // TODO: template-ify
+    // TODO: Lazy laoding
     struct TextureCache
     {
         TextureCache( std::string textureDir )
@@ -22,6 +23,7 @@ namespace Engine
             for ( const auto& entry : std::filesystem::directory_iterator{ path } )
             {
                 sf::Texture tex{};
+                std::cout << '\t';
                 loadTextureFileOrThrow( tex, entry.path() );
                 this->textures.insert( {entry.path().filename().string(), tex} );
             }
