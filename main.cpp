@@ -15,7 +15,7 @@ int main()
 
     Engine::Player player{ "/workspace/silenced-engine/Assets/Graphics/Characters/00.png", 1 };
 
-    Engine::Map map{ "/workspace/silenced-engine/TestMap.map", tilesetTextureCache.getTexturePointer( "00.png" ) };
+    Engine::Map map{ "/workspace/silenced-engine/TestMap2.map", tilesetTextureCache.getTexturePointer( "00.png" ) };
 
     float yMovement{};
     float xMovement{};
