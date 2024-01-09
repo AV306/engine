@@ -21,10 +21,10 @@ namespace Engine
 {
     struct Map extends public sf::Drawable, public sf::Transformable
     {
-        Map( std::string mapFilename, std::string tilesetFilename )
+        Map( std::string mapFilename, sf::Texture* texturePointer )
         {
-            // Initialise tileset texture
-            loadTextureFileOrThrow( this->tilesetTexture, tilesetFilename );
+            // Set pointer to tileset texture
+            this->tilesetTexturePointer = texturePointer;
 
             // Prepare to read map file
             std::ifstream mapStream{ mapFilename };
@@ -83,7 +83,7 @@ namespace Engine
                 states.transform *= this->getTransform(); // getTransform() is defined by sf::Transformable
 
                 // apply the texture
-                states.texture = &tilesetTexture;
+                states.texture = tilesetTexturePointer;
 
                 // you may also override states.shader or states.blendMode if you want
 
@@ -96,7 +96,7 @@ namespace Engine
             uint8_t height; // Height of map in tiles
             //uint8_t* tiles; // Array of tilemap indexes
 
-            sf::Texture tilesetTexture;
+            sf::Texture* tilesetTexturePointer;
             sf::VertexArray vertices;
 
             //vector<uint16_t> border_tiles; // Array of tile array indexes that cannot be moved onto
