@@ -1,0 +1,25 @@
+Friday (5 Jan)
+  Started work, got the main file working
+
+Monday (8 Jan)
+  Made tilemaps work, implemented Map struct that reads data from a file
+  Made dedicated Player struct
+
+Tuesday
+  Implemented TextureCache system to prefent duplication of textures, made Player and Map work with it
+  Fixed bugs in Map related to unformatted I/O
+
+Wednesday
+  Made Entity struct with update() method, and made Player inherit from it
+
+Thursday
+  
+
+===============================================================================
+
+TODO
+  Scenes
+  GUI
+  Animation
+  Physics
+  
