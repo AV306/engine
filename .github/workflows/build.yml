@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.cpp'
+      - '**.hpp'
       - '**.yml'
 
     branches: [ main ]
@@ -14,4 +15,5 @@ jobs:
 
     steps:
       - name: Build
-        run: "./build main"
+        # hell yeah
+        run: "cate"
