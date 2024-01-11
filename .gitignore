@@ -11,6 +11,7 @@ SilencedAssets/
 7zip/
 
 # Compiled binaries
+out/
 *.exe
 
 # Anything else I want to ignore
