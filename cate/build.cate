@@ -1,0 +1,10 @@
+compiler = "g++"
+
+Project project
+.files = { "src/main.cpp" }
+.includes = {"include"}
+.flags = "-O2 -lsfml-graphics -lsfml-window -lsfml-system"
+.smol = true
+.out = "out/engine"
+
+.build();
