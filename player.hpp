@@ -23,23 +23,37 @@ namespace Engine
 
         virtual void update( float deltaTime ) override
         {
-            xMovement = 0, yMovement = 0;
+            counter += deltaTime;
 
-            if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
-                xMovement = 20.0 * deltaTime;
-            else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
-                xMovement = -20.0 * deltaTime;
+            if ( counter % delay == 0 )
+            {
+                // Set target delta
+                if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
+                    targetYDelta = -this->movementDistance;
+                else ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
+                    targetYDelta = this->movementDistance;
 
-            if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
-                yMovement = -20.0 * deltaTime;
-            else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
-                yMovement = 20.0 * deltaTime;
+                if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
+                    targetXDelta = -this->movementDistance;
+                else ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
+                    targetXDelta = this->movementDistance;
+            }
 
-            this->move( xMovement, yMovement );
+            
         }
 
         private:
-            float xMovement{};
-            float yMovement{};
+            const uint delay = 1;
+            const short movementDistance = 32;
+            const float movementSpeed = 64;
+            bool shouldMove = false;
+
+            short targetXDelta{};
+            short targetYDelta{};
+
+            short currentXDelta{};
+            short currentYDelta{};
+
+            float counter{};
     };
 }

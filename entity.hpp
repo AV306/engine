@@ -2,7 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <string>
+#include <fstream>
+
 #include "constants.hpp"
+//#include "datafiles.hpp"
 #include "defines.hpp"
 
 namespace Engine
@@ -13,8 +17,10 @@ namespace Engine
             : sf::Sprite{ 
                 *textureAtlasPointer, // sf::Sprite accepts a reference but i'm bad so i used a pointer
                 sf::IntRect{
-                    startingTileIndex % SPRITE_ATLAS_WIDTH_SPRITES,startingTileIndex / SPRITE_ATLAS_WIDTH_SPRITES,
-                    SPRITE_ATLAS_SPRITE_SIZE_PIXELS,SPRITE_ATLAS_SPRITE_SIZE_PIXELS
+                    (startingTileIndex % SPRITE_ATLAS_WIDTH_SPRITES) * SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
+                    (startingTileIndex / SPRITE_ATLAS_WIDTH_SPRITES) * SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
+                    SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
+                    SPRITE_ATLAS_SPRITE_SIZE_PIXELS
                 }
             }
         {
@@ -26,4 +32,15 @@ namespace Engine
 
         }
     };
+
+    /*std::vector readEntityData( std::string path )
+    {
+        std::vector entities{};
+
+        DataFile file{ path, "ENT" };
+
+        std::ifstream& fileInputStream = file.getInputStream();
+
+        fileInputStream.get()
+    }*/
 }
