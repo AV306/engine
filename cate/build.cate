@@ -1,3 +1,5 @@
+// I can't believe it's litererally this easy to use cate
+
 compiler = "g++"
 
 Project project
@@ -5,6 +7,7 @@ Project project
 .includes = {"include"}
 .flags = "-O2 -lsfml-graphics -lsfml-window -lsfml-system"
 .smol = true
-.out = "out/engine"
+.out = "out/game.exe"
 
-.build();
+.clean()
+.build()
