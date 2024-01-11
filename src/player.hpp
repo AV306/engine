@@ -23,7 +23,7 @@ namespace Engine
 
         virtual void update( float deltaTime ) override
         {
-            counter += deltaTime;
+            /*counter += deltaTime;
 
             if ( counter % delay == 0 )
             {
@@ -37,8 +37,7 @@ namespace Engine
                     targetXDelta = -this->movementDistance;
                 else ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
                     targetXDelta = this->movementDistance;
-            }
-
+            }*/
             
         }
 

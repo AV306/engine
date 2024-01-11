@@ -1,5 +1,5 @@
 # Silenced unpacked assets
-Assets/
+SilencedAssets/
 *.7z
 *.zip
 *.xz

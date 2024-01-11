@@ -10,8 +10,8 @@ using namespace std;
 
 int main()
 {
-    Engine::TextureCache tilesetTextureCache{ "/workspace/silenced-engine/Assets/Graphics/Tilesets/" };
-    Engine::TextureCache spriteAtlasTextureCache{ "/workspace/silenced-engine/Assets/Graphics/Characters/" };
+    Engine::TextureCache tilesetTextureCache{ "/workspace/silenced-engine/SilencedAssets/Graphics/Tilesets/" };
+    Engine::TextureCache spriteAtlasTextureCache{ "/workspace/silenced-engine/SilencedAssets/Graphics/Characters/" };
 
     sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
