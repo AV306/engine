@@ -1,0 +1,16 @@
+name: build
+
+on:
+  push:
+    paths:
+      - '**.cpp'
+
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build
+        run: "./build main"
