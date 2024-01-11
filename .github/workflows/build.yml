@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.cpp'
+      - '**.hpp'
       - '**.yml'
 
     branches: [ main ]
@@ -13,5 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install Cate
+        run: "wget https://github.com/TheMilkies/Cate/releases/download/v2.9.6/cate_2.9-6_amd64.deb && sudo dpkg -i cate_2.9-6_amd64.deb && rm cate_2.9-6_amd64.deb"
+        
       - name: Build
-        run: "./build main"
+        # hell yeah
+        run: "cate build"
