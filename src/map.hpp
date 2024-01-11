@@ -51,6 +51,9 @@ namespace Engine
             // 0xFF * 0xFF = 0xFE01
             for ( uint16_t mapTileIndex = 0; mapTileIndex < width*height; mapTileIndex++ )
             {
+                // FIXME: Change this part to increase the tileset maximum size
+                // You'll probably need to change this quite a bit,
+                // I'll leave that to someone more experienced
                 uint8_t tileID = (uint8_t) mapStream.get();
                 //std::cout << "Drawing tile ID " << (short) tileID << "; ";
 

@@ -8,12 +8,16 @@
 #include "constants.hpp"
 //#include "datafiles.hpp"
 #include "defines.hpp"
+#include "types.hpp"
 
 namespace Engine
 {
     struct Entity extends public sf::Sprite
     {
-        Entity( sf::Texture* textureAtlasPointer, uint8_t startingTileIndex )
+        // Note: the type of startingTileIndex was changed from uint8_t
+        // to remove the limitation on sprite atlas size
+        // This one is simple because entities aren't data-driven yet
+        Entity( sf::Texture* textureAtlasPointer, uint startingTileIndex )
             : sf::Sprite{ 
                 *textureAtlasPointer, // sf::Sprite accepts a reference but i'm bad so i used a pointer
                 sf::IntRect{
