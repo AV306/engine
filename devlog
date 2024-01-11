@@ -12,10 +12,14 @@ Tuesday
 Wednesday
   Made Entity struct with update() method, and made Player inherit from it
 
+Thursday
+  
+
 ===============================================================================
 
 TODO
   Scenes
   GUI
   Animation
+  Physics
   
