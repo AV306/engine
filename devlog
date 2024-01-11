@@ -13,13 +13,16 @@ Wednesday
   Made Entity struct with update() method, and made Player inherit from it
 
 Thursday
-  
+  Started work on animation
+  Started using Cate as the build system
 
 ===============================================================================
 
 TODO
-  Scenes
+  Scenes + generally making more things data-driven
   GUI
+    - font rendering
+    - imgui, withou actually using dear-imgui
   Animation
   Physics
   
