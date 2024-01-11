@@ -1,0 +1,17 @@
+{
+    "SceneType": "Game",
+    "PlayerStartingPosition": [0, 0],
+    "Entities": [
+        {
+            "SpriteAtlas": "22.png",
+            "StartingTileIndex": 3,
+            "StartingPosition": [10, 10],
+            "Script": "ENtityA.script"
+        },
+        {
+            "SpriteAtlas": "22.png",
+            "StartingTileIndex": 8,
+            "StartingPosition": [10, 10]
+        },
+    ]
+}
