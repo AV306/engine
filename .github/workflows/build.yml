@@ -19,4 +19,4 @@ jobs:
         
       - name: Build
         # hell yeah
-        run: "cate build"
+        run: "cate cate/build.cate"
