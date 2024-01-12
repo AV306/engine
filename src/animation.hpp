@@ -6,20 +6,51 @@
 #include <map>
 #include <vector>
 
+#include <cstdint>
+
 #include "types.hpp"
 #include "utils.hpp"
 
 namespace Engine
 {
-    struct AnimationNode
+    struct Frame
     {
-        AnimationNode( float frameDuration, std::initializer_list<sf::IntRect> frames )
+        Frame( uint8_t atlasTileIndex, float frameDurationSeconds )
         {
-            this->frameDurationSeconds = frameDuration;
-            this->frames{ frames };
+            this->frameDurationSeconds = frameDurationSeconds;
+
+            this->textureRect = sf::IntRect{
+                (startingTileIndex % SPRITE_ATLAS_WIDTH_SPRITES) * SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
+                (startingTileIndex / SPRITE_ATLAS_WIDTH_SPRITES) * SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
+                SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
+                SPRITE_ATLAS_SPRITE_SIZE_PIXELS
+            };
         }
 
-        sf::IntRect& getCurrentFrame()
+        float getDuration()
+        {
+            return this->frameDurationSeconds;
+        }
+
+        sf::IntRect& getTextureRect()
+        {
+            return this->textureRect;
+        }
+
+        private:
+            float frameDurationSeconds;
+            sf::IntRect textureRect;
+    };
+
+    struct AnimationNode
+    {
+        AnimationNode( float frameDuration, std::initializer_list<uint8_t> frames )
+        {
+            this->frameDurationSeconds = frameDuration;
+
+        }
+
+        Frame& getCurrentFrame()
         {
             return this->frames[currentFrameIndex];
         }
@@ -38,23 +69,12 @@ namespace Engine
         {
             this->time += deltaTime;
 
-            if ( this->time > this->frameDurationSeconds )
-            {
-                // If enough time has passed for at least one frame to pass,
-                // calculate the number of frames that should have passed
-                uint framesToAdvanceBy = (uint) (this->time / this->frameDurationSeconds);
-
-                // Set the timer to the remaining amount of time
-                this->time %= this->frameDurationSeconds;
-
-                // Advance frame counter
-                this->currentFrameIndex += framesToAdvanceBy;
-            }
+            
+            
         }
 
         private:
-            float frameDurationSeconds;
-            std::vector<sf::IntRect> frames;
+            std::vector<Frame> frames;
             uint currentFrameIndex{};
             float time{};
     };
