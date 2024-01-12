@@ -19,4 +19,4 @@ jobs:
         
       - name: Build
         # hell yeah
-        run: "cate src/main.cpp"
+        run: "cate cate/build.cate"
