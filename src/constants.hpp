@@ -1,5 +1,7 @@
 #pragma once
 
+// TODO: make data-driven
+
 // RPG Maker VX Ace uses 32x32 tiles, and each tilemap is 8 tiles by 16 tiles
 #define TILESET_TILE_SIZE_PIXELS 32
 #define TILESET_WIDTH_TILES 8
