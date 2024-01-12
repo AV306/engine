@@ -29,3 +29,9 @@ jobs:
       - name: Build
         # hell yeah
         run: "cate"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4.0.0
+        with:
+          name: "builds"
+          path: "out/*"
