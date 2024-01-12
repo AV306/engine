@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Install Cate
         run: "wget https://github.com/TheMilkies/Cate/releases/download/v2.9.6/cate_2.9-6_amd64.deb && sudo dpkg -i cate_2.9-6_amd64.deb && rm cate_2.9-6_amd64.deb"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
         
       - name: Build
         # hell yeah
