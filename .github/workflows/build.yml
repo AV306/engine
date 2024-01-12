@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Install Cate
@@ -19,4 +22,4 @@ jobs:
         
       - name: Build
         # hell yeah
-        run: "cate cate/build.cate"
+        run: "cate"
