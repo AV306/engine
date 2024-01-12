@@ -17,7 +17,13 @@ Thursday
   Started using Cate as the build system
 
 Friday
-  
+  Took a break
+
+Monday (15 Jan)
+  TextureCache lazy loading with nullptr check (todo)
+  IMGUI (todo)
+
+
 
 ===============================================================================
 
@@ -28,4 +34,5 @@ TODO
     - imgui, withou actually using dear-imgui
   Animation
   Physics
+  Lazy loading for TextureCache
   
