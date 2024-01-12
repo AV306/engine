@@ -21,6 +21,7 @@ namespace Engine
             : sf::Sprite{ 
                 *textureAtlasPointer, // sf::Sprite accepts a reference but i'm bad so i used a pointer
                 sf::IntRect{
+                    // Potentially narrowing but it's going to be really hard to reach that point
                     (startingTileIndex % SPRITE_ATLAS_WIDTH_SPRITES) * SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
                     (startingTileIndex / SPRITE_ATLAS_WIDTH_SPRITES) * SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
                     SPRITE_ATLAS_SPRITE_SIZE_PIXELS,
