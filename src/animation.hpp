@@ -47,7 +47,6 @@ namespace Engine
         AnimationNode( float frameDuration, std::initializer_list<uint8_t> frames )
         {
             this->frameDurationSeconds = frameDuration;
-
         }
 
         Frame& getCurrentFrame()

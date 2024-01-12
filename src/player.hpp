@@ -38,6 +38,7 @@ namespace Engine
                 else ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
                     targetXDelta = this->movementDistance;
             }*/
+
             
         }
 
