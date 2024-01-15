@@ -1,0 +1,16 @@
+#! /usr/bin/sh
+
+# TheMilkies/Cate
+wget https://github.com/TheMilkies/Cate/releases/download/v2.9.6/cate_2.9-6_amd64.deb
+sudo dpkg -i cate_2.9-6_amd64.deb
+rm cate_2.9-6_amd64.deb
+
+# Taywee/Args
+git clone https://github.com/Taywee/args
+cd args/
+sudo make install
+cd ../
+rm -rf args/
+
+# SFML
+sudo apt install libsfml-dev -y

@@ -12,6 +12,7 @@
 ## limitations
 
 - Map tilesets can only contain a maximum of 255 tiles (about 16x16), because the map format currently only allocates 1 byte for the tile index
+- Engine will crash with a segfault if a non-existent texture is loaded
 
 ## building
 
