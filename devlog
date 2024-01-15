@@ -19,6 +19,12 @@ Thursday
 Friday
   Took a break
 
+Monday (15 Jan)
+  TextureCache lazy loading with nullptr check (todo)
+  IMGUI (todo)
+
+
+
 ===============================================================================
 
 TODO
@@ -28,4 +34,5 @@ TODO
     - imgui, withou actually using dear-imgui
   Animation
   Physics
+  Lazy loading for TextureCache
   
