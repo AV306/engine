@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     Engine::TextureCache tilesetTextureCache{ "/workspace/silenced-engine/SilencedAssets/Graphics/Tilesets/" };
-    Engine::TextureCache spriteAtlasTextureCache{ "/workspace/silenced-engine/SilencedAssets/Graphics/Characters/" };
+    Engine::TextureCache spriteAtlasTextureCache{ "/workspace/silenced-engine/SilencedAssets/Graphics/Characters/", '!' };
 
     sf::RenderWindow window{ sf::VideoMode{ 400, 300 }, "Silenced Engine" };
 
