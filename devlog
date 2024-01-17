@@ -19,6 +19,8 @@ Thursday
 Friday
   Took a break
 
+--------------------------------
+
 Monday (15 Jan)
   Implemented TextureCache lazy loading
 
@@ -26,7 +28,7 @@ Tuesday
   Separated game loop logic and related ceremony from program entrypoint
 
 Wednesday
-
+  Made a templated version of TextureCache and started work on GUI canvas
 
 
 
@@ -39,5 +41,4 @@ TODO
     - imgui, withou actually using dear-imgui
   Animation
   Physics
-  Lazy loading for TextureCache
   
