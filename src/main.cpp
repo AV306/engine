@@ -17,19 +17,19 @@ int main( int argc, char** argv )
     args::ArgParser parser{};
     parser.helptext = "Usage: <executable name> --asset-dir=\"\" ...";
     parser.version = "0.1";
-    parser.option( "asset-dir" );
+    parser.option( "asset-dir", "/workspace/silenced-engine/SilencedAssets/" );
     parser.flag( "quiet q" );
     parser.parse( argc, argv );
     std::filesystem::path assetDirectoryPath{ parser.value( "asset-dir" ) };
 
     // Global stuff
-    Engine::TextureCache tilesetTextureCache{ assetDirectoryPath / "Graphics/Tilesets/" };
-    Engine::TextureCache spriteAtlasTextureCache{ assetDirectoryPath / "Graphics/Characters/", '!' };
+    Engine::AssetCache<sf::Texture> tilesetTextureCache{ assetDirectoryPath / "Graphics/Tilesets/" };
+    Engine::AssetCache<sf::Texture> spriteAtlasTextureCache{ assetDirectoryPath / "Graphics/Characters/" };
 
-    Engine::Player player{ spriteAtlasTextureCache.getTexturePointer( "00.png" ), 1 };
-    Engine::Entity entity{ spriteAtlasTextureCache.getTexturePointer( "22.png" ), 2 };
+    Engine::Player player{ spriteAtlasTextureCache.getAssetPointer( "00.png" ), 1 };
+    Engine::Entity entity{ spriteAtlasTextureCache.getAssetPointer( "22.png" ), 2 };
 
-    Engine::Map map{ "/workspace/silenced-engine/TestMap2.map", tilesetTextureCache.getTexturePointer( "00.png" ) };
+    Engine::Map map{ "/workspace/silenced-engine/TestMap2.map", tilesetTextureCache.getAssetPointer( "00.png" ) };
     
     // Engine instance
     Engine::GameEngine engine{ "Engine", 400, 300 };

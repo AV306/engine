@@ -1,4 +1,4 @@
-# Silenced unpacked assets
+# Silenced unpacked assets (for testing)
 SilencedAssets/
 *.7z
 *.zip
