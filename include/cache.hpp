@@ -17,13 +17,12 @@ namespace Engine
     struct TextureCache
     {
         // Constructor to load everything in one go
-        TextureCache( std::string textureDir )
+        TextureCache( std::filesystem::path textureDir )
             : textureDirectoryPath{ textureDir }
         {
             std::cout << "Caching textures from " << textureDir << '\n';
-            std::filesystem::path path{ textureDir };
 
-            for ( const auto& entry : std::filesystem::directory_iterator{ path } )
+            for ( const auto& entry : std::filesystem::directory_iterator{ textureDir } )
                 this->_loadTextureIntoMap( entry );
         }
 
@@ -32,9 +31,8 @@ namespace Engine
             : textureDirectoryPath{ textureDir }
         {
             std::cout << "Caching priority textures from " << textureDir << '\n';
-            std::filesystem::path path{ textureDir };
 
-            for ( const auto& entry : std::filesystem::directory_iterator{ path } )
+            for ( const auto& entry : std::filesystem::directory_iterator{ textureDir } )
             {
                 // Skip non-priority files
                 if ( entry.path().filename().c_str()[0] != priorityPrefix ) continue;
