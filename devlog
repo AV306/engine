@@ -22,6 +22,12 @@ Friday
 Monday (15 Jan)
   Implemented TextureCache lazy loading
 
+Tuesday
+  Separated game loop logic and related ceremony from program entrypoint
+
+Wednesday
+
+
 
 
 ===============================================================================
