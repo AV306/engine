@@ -9,6 +9,29 @@
 
 namespace Engine
 {
+    struct GuiElement extends public sf::Transformable, sf::Drawable
+    {
+        GuiElement( )
+        {
+
+        }
+
+        virtual void draw( sf::RenderTarget& target, sf::RenderStates states ) const
+        {
+            this->sprite.draw();
+        }
+
+        private:
+            
+    };
+
+    struct GuiButton extends public GuiElement
+    {
+        GuiButton( )
+        private:
+            sf::IntRect bounds;
+    };
+
     struct GuiCanvas extends public sf::Drawable, sf::Transformable
     {
         GuiCanvas()
@@ -16,20 +39,25 @@ namespace Engine
 
         }
 
-        void writeText( std::string text, sf::Font* fontPointer, uint size, sf::Text::Style style, sf::Vector2f position )
+        void addStaticText( std::string text, sf::Font& font, uint size, sf::Text::Style style, sf::Vector2f position )
         {
             // Construct text object in vector
-            sf::Text& textRef = this->texts.emplace_back( text, *fontPointer, size );
+            sf::Text& textRef = this->texts.emplace_back( text, font, size );
 
             // Update other properties not included in constructor
             textRef.setStyle( style );
             textRef.setPosition( position );
         }
 
-        void writeText( std::string text, sf::Font* fontPointer, uint size )
+        void addStaticText( std::string text, sf::Font& font, uint size )
         {
             // Construct text object in vector
-            sf::Text& textRef = this->texts.emplace_back( text, *fontPointer, size );
+            sf::Text& textRef = this->texts.emplace_back( text, font, size );
+        }
+        
+        void writeText( std::string text, sf::Font& font, uint size )
+        {
+            
         }
 
         std::vector<sf::Text>& getTexts()

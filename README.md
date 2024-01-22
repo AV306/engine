@@ -9,6 +9,7 @@
 - Tile-based maps
 - update() method for entities like Unity
 - It works :D
+- (Almost) all objects accept references to assets (fonts, textures etc)
 
 ## limitations
 

@@ -73,6 +73,38 @@ namespace Engine
             return &(this->assets.at( filename ));
         }
 
+        T& getAsset( std::string filename )
+        {
+            try
+            {
+                // Attempt to grab the texture with the filename and return a pointer to it
+                // Will throw out_of_range if it's not present
+                return this->assets.at( filename );
+            }
+            catch ( const std::out_of_range& noSuchElementException )
+            {
+                // Texture not found, might not be loaded yet
+                // Try loading it
+
+                // Reconstruct the path
+                std::filesystem::path filePath = this->assetDirectoryPath / filename;
+                
+                try
+                {
+                    std::cout << "(Lazy)";
+                    this->_loadAssetIntoMap( filePath );
+                }
+                catch ( const std::invalid_argument& noSuchFileException )
+                {
+                    // Failed loading, file really isn't present
+                    std::cout << "Failed to load asset from " << filename << '\n';
+                    throw invalid_argument{ "Could not load asset from " + filename };
+                }
+            }
+
+            return this->assets.at( filename );
+        }
+
         private:
             void _loadAssetIntoMap( std::filesystem::path path )
             {

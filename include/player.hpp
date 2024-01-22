@@ -17,6 +17,10 @@ namespace Engine
 {
     struct Player extends public Entity
     {
+        Player( sf::Texture& textureAtlas, uint8_t startingTileIndex )
+            : Entity{ textureAtlas, startingTileIndex }
+        {}
+
         Player( sf::Texture* textureAtlasPointer, uint8_t startingTileIndex )
             : Entity{ textureAtlasPointer, startingTileIndex }
         {}

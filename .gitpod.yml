@@ -5,7 +5,7 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: ./init
+  - init: ./install_deps
 
 image:
   file: .gitpod.Dockerfile
