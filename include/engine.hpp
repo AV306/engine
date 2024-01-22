@@ -16,7 +16,7 @@ namespace Engine
             std::cout << "Initialising window (" << width << ", " << height << ")\n";
         }
 
-        void setGameLoop( std::function<void( float )> loopFunc )
+        void setGameLoop( std::function<void( sf::Event&, float )> loopFunc )
         {
             this->gameLoop = loopFunc;
         }
@@ -26,7 +26,10 @@ namespace Engine
             while ( this->window.isOpen() )
             {
                 this->deltaTime = clock.restart().asSeconds();
-                this->gameLoop( deltaTime );
+
+                this->window.pollEvent( this->event );
+
+                this->gameLoop( this->event, this->deltaTime );
             }
         }
 
@@ -37,7 +40,8 @@ namespace Engine
 
         private:
             sf::RenderWindow window;
-            std::function<void( float )> gameLoop;
+            sf::Event event;
+            std::function<void( sf::Event&, float )> gameLoop;
             sf::Clock clock{};
             float deltaTime{};
     };

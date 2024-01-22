@@ -21,12 +21,12 @@ namespace Engine
 {
     struct Map extends public sf::Drawable, public sf::Transformable
     {
-        Map( std::string mapFilename, sf::Texture* texturePointer )
+        Map( std::string mapFilename, sf::Texture& texture )
         {
             std::cout << "Loading map " << mapFilename << '\n';
 
             // Set pointer to tileset texture
-            this->tilesetTexturePointer = texturePointer;
+            this->tilesetTexturePointer = &texture;
 
             // Prepare to read map file
             std::ifstream mapStream{ mapFilename };
