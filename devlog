@@ -36,16 +36,20 @@ Thursday
 Friday
   Break
 
+--------------------------------
+
 Monday (22 Jan)
   Implemented scene system
+
+Tuesday
+  
 
 ===============================================================================
 
 TODO
-  Scenes + generally making more things data-driven
+  generally making more things data-driven
   GUI
-    - font rendering
     - imgui, withou actually using dear-imgui
   Animation
   Physics
-  
+  Input manager (filtering)
