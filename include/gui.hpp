@@ -9,27 +9,40 @@
 
 namespace Engine
 {
-    struct GuiElement extends public sf::Transformable, sf::Drawable
+    // FIXME: I'm really not sure how to go about making this
+    
+    struct GuiElement extends public sf::Sprite
     {
         GuiElement( )
         {
 
         }
 
-        virtual void draw( sf::RenderTarget& target, sf::RenderStates states ) const
-        {
-            this->sprite.draw();
-        }
-
         private:
             
     };
 
+    /**
+     * Provides a button with four regions from a single texture atlas (active, disabled, hover, click), and click action
+     */
     struct GuiButton extends public GuiElement
     {
         GuiButton( )
+        {
+
+        }
+
+        virtual void draw() const
+        {
+
+        }
+
         private:
-            sf::IntRect bounds;
+            sf::IntRect activeTextureBounds;
+            sf::IntRect disabledTextureBounds;
+            sf::IntRect hoverTextureBounds;
+            sf::IntRect selectededTextureBounds;
+            
     };
 
     struct GuiCanvas extends public sf::Drawable, sf::Transformable

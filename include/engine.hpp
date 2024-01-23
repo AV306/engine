@@ -1,9 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 #include <string>
 
 #include "types.hpp"
+#include "scene.hpp"
 #include "utils.hpp"
 
 namespace Engine
@@ -16,8 +18,9 @@ namespace Engine
             std::cout << "Initialising window (" << width << ", " << height << ")\n";
         }
 
-        void setGameLoop( std::function<void( sf::Event&, float )> loopFunc )
+        void setGameLoop( Scene* loopFunc )
         {
+            std::cout << "Changed game loop\n";
             this->gameLoop = loopFunc;
         }
 
@@ -29,7 +32,9 @@ namespace Engine
 
                 this->window.pollEvent( this->event );
 
-                this->gameLoop( this->event, this->deltaTime );
+                if ( event.type == sf::Event::Closed ) this->window.close();
+
+                (*(this->gameLoop))( this->event, this->deltaTime );
             }
         }
 
@@ -41,7 +46,7 @@ namespace Engine
         private:
             sf::RenderWindow window;
             sf::Event event;
-            std::function<void( sf::Event&, float )> gameLoop;
+            Scene* gameLoop;
             sf::Clock clock{};
             float deltaTime{};
     };

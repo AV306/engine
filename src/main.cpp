@@ -42,15 +42,19 @@ int main( int argc, char** argv )
     //canvas.addStaticText( "FPS: ", fontCache.getAsset( "VL-Gothic-Regular(FromThatSteamGuy).ttf" ), 30 );
     
     // Engine instance
-    Engine::GameEngine engine{ "Engine", 400, 300 };
+    Engine::GameEngine engine{ "Engine", 544, 416 };
     engine.getWindow().setFramerateLimit( framerateLimit );
 
-    MainMenu menu{ engine, imageTextureCache.getAsset( "00.png" ) };
+    //MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ) };
     Level scene{ engine, spriteAtlasTextureCache, tilesetTextureCache };
+    MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ), &scene };
 
-    engine.setGameLoop( menu );
+    
+    //engine.getWindow().setFramerateLimit( framerateLimit );
+
+    engine.setGameLoop( &menu );
+    //engine.setGameLoop( scene );
 
     engine.run();
-
     return 0;
 }
