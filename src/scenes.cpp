@@ -1,33 +1,39 @@
 #pragma once
 
+#include <iostream>
 #include "defines.hpp"
 #include "engine.hpp"
 #include "cache.hpp"
 #include "entity.hpp"
 #include "player.hpp"
 #include "scene.hpp"
+using namespace std;
 
 struct MainMenu extends public Engine::Scene
 {
-    MainMenu( Engine::GameEngine& engine, sf::Texture& backgroundImage )
+    MainMenu( Engine::GameEngine& engine, sf::Texture& backgroundImage, Engine::Scene& next )
         : engine{ engine },
-        background{ backgroundImage }
+        background{ backgroundImage },
+        nextScene{ next }
     {
 
     }
 
     virtual void operator()( sf::Event& event, float deltaTime ) override
     {
-        if ( event.type == sf::Event::Closed ) engine.getWindow().close();
+        //if ( event.type == sf::Event::Closed ) engine.getWindow().close();
 
         engine.getWindow().clear();
         engine.getWindow().draw( this->background );
         engine.getWindow().display();
+
+        //engine.setGameLoop( nextScene );
     }
 
     private:
         Engine::GameEngine& engine;
         sf::Sprite background;
+        Engine::Scene& nextScene;
 };
 
 struct Level extends public Engine::Scene
@@ -46,7 +52,9 @@ struct Level extends public Engine::Scene
     virtual void operator()( sf::Event& event, float deltaTime ) override
     {
         // Events
-        if ( event.type == sf::Event::Closed ) engine.getWindow().close();
+        //if ( event.type == sf::Event::Closed ) engine.getWindow().close();
+
+        //cout << "In level loop\n";
 
         // Updates
         player.update( deltaTime );
@@ -57,7 +65,6 @@ struct Level extends public Engine::Scene
         engine.getWindow().draw( entity );
         engine.getWindow().draw( player );
         engine.getWindow().display();
-    
     }
 
     private:
