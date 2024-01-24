@@ -34,7 +34,7 @@ int main( int argc, char** argv )
 
     // Global stuff (independent of scene)
     Engine::AssetCache<sf::Texture> tilesetTextureCache{ assetDirectoryPath / "Graphics/Tilesets/", '_' };
-    Engine::AssetCache<sf::Texture> imageTextureCache{ assetDirectoryPath / "Graphics/Pictures/" };
+    Engine::AssetCache<sf::Texture> imageTextureCache{ assetDirectoryPath / "Graphics/Titles1/", '_' };
     Engine::AssetCache<sf::Texture> spriteAtlasTextureCache{ assetDirectoryPath / "Graphics/Characters/", '_' };
     Engine::AssetCache<sf::Font> fontCache{ assetDirectoryPath / "Fonts" };
 
@@ -47,7 +47,7 @@ int main( int argc, char** argv )
 
     //MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ) };
     Level scene{ engine, spriteAtlasTextureCache, tilesetTextureCache };
-    MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ), &scene };
+    MainMenu menu{ engine, imageTextureCache.getAsset( "00.png" ), &scene };
 
     
     //engine.getWindow().setFramerateLimit( framerateLimit );
