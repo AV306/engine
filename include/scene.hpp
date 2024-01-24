@@ -12,6 +12,6 @@ namespace Engine
      */
     struct Scene
     {
-        virtual void operator()( sf::Event& event, float deltaTime ) {}
+        virtual void operator()( sf::Event& event, float deltaTime ) = 0;
     };
 }

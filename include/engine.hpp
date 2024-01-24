@@ -18,7 +18,7 @@ namespace Engine
             std::cout << "Initialising window (" << width << ", " << height << ")\n";
         }
 
-        void setGameLoop( Scene& loopFunc )
+        void setGameLoop( Scene* loopFunc )
         {
             std::cout << "Changed game loop\n";
             this->gameLoop = loopFunc;
@@ -34,7 +34,7 @@ namespace Engine
 
                 if ( event.type == sf::Event::Closed ) this->window.close();
 
-                this->gameLoop( this->event, this->deltaTime );
+                (*(this->gameLoop))( this->event, this->deltaTime );
             }
         }
 
@@ -46,7 +46,7 @@ namespace Engine
         private:
             sf::RenderWindow window;
             sf::Event event;
-            Scene gameLoop{};
+            Scene* gameLoop;
             sf::Clock clock{};
             float deltaTime{};
     };

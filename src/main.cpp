@@ -47,12 +47,12 @@ int main( int argc, char** argv )
 
     //MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ) };
     Level scene{ engine, spriteAtlasTextureCache, tilesetTextureCache };
-    MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ), scene };
+    MainMenu menu{ engine, imageTextureCache.getAsset( "122.png" ), &scene };
 
     
     //engine.getWindow().setFramerateLimit( framerateLimit );
 
-    engine.setGameLoop( menu );
+    engine.setGameLoop( &menu );
     //engine.setGameLoop( scene );
 
     engine.run();

@@ -11,7 +11,7 @@ using namespace std;
 
 struct MainMenu extends public Engine::Scene
 {
-    MainMenu( Engine::GameEngine& engine, sf::Texture& backgroundImage, Engine::Scene& next )
+    MainMenu( Engine::GameEngine& engine, sf::Texture& backgroundImage, Engine::Scene* next )
         : engine{ engine },
         background{ backgroundImage },
         nextScene{ next }
@@ -27,13 +27,14 @@ struct MainMenu extends public Engine::Scene
         engine.getWindow().draw( this->background );
         engine.getWindow().display();
 
-        //engine.setGameLoop( nextScene );
+        if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Enter ) )
+            engine.setGameLoop( nextScene );
     }
 
     private:
         Engine::GameEngine& engine;
         sf::Sprite background;
-        Engine::Scene& nextScene;
+        Engine::Scene* nextScene;
 };
 
 struct Level extends public Engine::Scene
